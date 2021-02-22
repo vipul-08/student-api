@@ -23,7 +23,7 @@ func StartRoutes() {
 
 	ops := middleware.RedocOpts{SpecURL: "/swagger.yaml"}
 	sh := middleware.Redoc(ops, nil)
-	router.Handle("/", sh)
+	router.Handle("/docs", sh)
 	router.Handle("/swagger.yaml", http.FileServer(http.Dir("./")))
 
 	log.Fatal(http.ListenAndServe(":"+os.Getenv("PORT"), router))
