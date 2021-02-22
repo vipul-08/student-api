@@ -4,3 +4,7 @@ swagger: check_install
 	GO111MODULE=on swagger generate spec -o ./swagger.yaml --scan-models
 test:
 	GO111MODULE=on go test ./... -v
+build:
+	GO111MODULE=on go mod download
+run:
+	GO111MODULE=on go run main.go
