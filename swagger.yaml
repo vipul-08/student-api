@@ -1,0 +1,125 @@
+basePath: /
+consumes:
+- application/json
+definitions:
+  Student:
+    description: gorm.Model
+    properties:
+      age:
+        format: uint8
+        type: integer
+        x-go-name: Age
+      branch:
+        type: string
+        x-go-name: Branch
+      class:
+        type: string
+        x-go-name: Class
+      id:
+        format: int64
+        type: integer
+        x-go-name: Id
+      name:
+        type: string
+        x-go-name: Name
+    type: object
+    x-go-package: github.com/vipul-08/student-api/domain
+info:
+  description: Documentation of Student API
+  title: Student API
+  version: 1.0.0
+paths:
+  /students:
+    get:
+      description: Returns list of all students
+      operationId: listStudents
+      responses:
+        "200":
+          $ref: '#/responses/studentsResponse'
+      tags:
+      - students
+    post:
+      description: Create a new student
+      operationId: createStudent
+      parameters:
+      - description: |-
+          Student data structure to Update or Create.
+          Note: the id field is ignored by update
+        in: body
+        name: Body
+        required: true
+        schema:
+          $ref: '#/definitions/Student'
+      responses:
+        "200":
+          $ref: '#/responses/studentResponse'
+      tags:
+      - students
+    put:
+      description: Update a student details
+      operationId: updateStudent
+      parameters:
+      - description: |-
+          Student data structure to Update or Create.
+          Note: the id field is ignored by update
+        in: body
+        name: Body
+        required: true
+        schema:
+          $ref: '#/definitions/Student'
+      responses:
+        "200":
+          $ref: '#/responses/studentResponse'
+      tags:
+      - students
+  /students/{id}:
+    delete:
+      description: Returns a student object
+      operationId: deleteStudent
+      parameters:
+      - description: The id of a specific student
+        format: int64
+        in: path
+        name: id
+        required: true
+        type: integer
+        x-go-name: ID
+      responses:
+        "204":
+          $ref: '#/responses/noContent'
+      tags:
+      - students
+    get:
+      description: Returns a student object
+      operationId: getStudent
+      parameters:
+      - description: The id of a specific student
+        format: int64
+        in: path
+        name: id
+        required: true
+        type: integer
+        x-go-name: ID
+      responses:
+        "200":
+          $ref: '#/responses/studentResponse'
+      tags:
+      - students
+produces:
+- application/json
+responses:
+  noContent:
+    description: ""
+  studentResponse:
+    description: A student object returns in response
+    schema:
+      $ref: '#/definitions/Student'
+  studentsResponse:
+    description: A list of students returns in response
+    schema:
+      items:
+        $ref: '#/definitions/Student'
+      type: array
+schemes:
+- http
+swagger: "2.0"
