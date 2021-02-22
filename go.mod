@@ -1,6 +1,7 @@
 module github.com/vipul-08/student-api
 
-go 1.13
+// +heroku goVersion go1.14
+go 1.14
 
 require (
 	github.com/go-openapi/errors v0.20.0 // indirect

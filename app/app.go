@@ -7,6 +7,7 @@ import (
 	"github.com/vipul-08/student-api/service"
 	"log"
 	"net/http"
+	"os"
 )
 
 func StartRoutes() {
@@ -25,5 +26,5 @@ func StartRoutes() {
 	router.Handle("/docs", sh)
 	router.Handle("/swagger.yaml", http.FileServer(http.Dir("./")))
 
-	log.Fatal(http.ListenAndServe(":8080", router))
+	log.Fatal(http.ListenAndServe(":"+os.Getenv("PORT"), router))
 }
